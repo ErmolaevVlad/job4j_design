@@ -1,0 +1,94 @@
+package ru.job4j.collection;
+
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
+public class ForwardLinked<T> implements Iterable<T> {
+    private int size;
+    private int modCount;
+    private Node<T> head;
+
+    public void add(T value) {
+       Node<T> l = head;
+        final Node<T> newNode = new Node<>(value, null);
+        if (head == null) {
+            head = newNode;
+        } else {
+            while (l.next != null) {
+                l = l.next;
+            }
+            l.next = newNode;
+        }
+        modCount++;
+        size++;
+    }
+
+    public T get(int index) {
+       Objects.checkIndex(index, size);
+        Node<T> next = head;
+        for (int i = 0; i != index; i++) {
+            next = next.next;
+        }
+        return next.item;
+    }
+
+    public T deleteFirst() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        T deleteItem = head.item;
+        if (head.next != null) {
+            Node<T> next = head.next;
+            if (next.next == null) {
+                head = next;
+            } else {
+                while (next.next != null) {
+                    head = next;
+                    next = next.next;
+                }
+            }
+        } else {
+            head = null;
+        }
+        size--;
+        return deleteItem;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+         return new Iterator<T>() {
+            final int expectedModCount = modCount;
+            Node<T> l;
+            Node<T> next = head;
+
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return next != null;
+            }
+
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                l = next;
+                next = next.next;
+                return l.item;
+            }
+        };
+    }
+
+    private static class Node<T> {
+       private T item;
+        private Node<T> next;
+
+        Node(T element, Node<T> next) {
+            this.item = element;
+            this.next = next;
+        }
+    }
+}
