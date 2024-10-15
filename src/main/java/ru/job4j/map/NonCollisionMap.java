@@ -12,32 +12,26 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-        if ((float) count / table.length >= LOAD_FACTOR) {
+        if (count * 1.0 / table.length  >= LOAD_FACTOR) {
             expand();
         }
         boolean rsl = false;
-        int hashCode = Objects.hashCode(key);
-        int hash = hash(hashCode);
-        int index = indexFor(hash);
+        int index = getIndex(key);
         if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             modCount++;
             count++;
             rsl = true;
         }
-
         return rsl;
     }
 
     @Override
     public V get(K key) {
-        int hashCode = Objects.hashCode(key);
-        int hash = hash(hashCode);
-        int index = indexFor(hash);
+        int index = getIndex(key);
         V rsl = null;
         if (table[index] != null) {
-            if (hashCode == (Objects.hashCode(table[index].key))
-                    && Objects.equals(key, table[index].key)) {
+            if (compareKey(key, index)) {
                rsl = table[index].value;
             }
         }
@@ -46,13 +40,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean remove(K key) {
-        int hashCode = Objects.hashCode(key);
-        int hash = hash(hashCode);
-        int index = indexFor(hash);
+        int index = getIndex(key);
         boolean rsl = false;
         if (table[index] != null) {
-            if (hashCode == (Objects.hashCode(table[index].key))
-                    && Objects.equals(key, table[index].key)) {
+            if (compareKey(key, index)) {
                 table[index] = null;
                 rsl = true;
                 modCount++;
@@ -111,6 +102,17 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
             i++;
         }
         table = newTable;
+    }
+
+    private int getIndex(K key) {
+        int hashCode = Objects.hashCode(key);
+        int hash = hash(hashCode);
+        return  indexFor(hash);
+    }
+
+    private boolean compareKey(K key, int index) {
+       return Objects.hashCode(key) == (Objects.hashCode(table[index].key))
+                && Objects.equals(key, table[index].key);
     }
 
     private static class MapEntry<K, V> {
