@@ -27,5 +27,4 @@ class AnalysisTest {
         }
         assertThat("10:58:01;11:01:01").hasToString(result.toString());
     }
-
 }
