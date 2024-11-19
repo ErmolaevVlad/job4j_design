@@ -13,11 +13,11 @@ public class Analysis {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(target))) {
             reader.lines().forEach(list::add);
             for (String str : list) {
-                if ((str.split(" ")[0].equals("400") || str.split(" ")[0].equals("500"))
+                if ((str.contains("400") || str.contains("500"))
                         && works) {
                     output.append(str.split(" ")[1]);
                     works = false;
-                } else if (!(str.split(" ")[0].equals("400") || str.split(" ")[0].equals("500"))
+                } else if (!(str.contains("400") || str.contains("500"))
                         && !works) {
                     output.append(";").append(str.split(" ")[1]).append("\n");
                     works = true;
