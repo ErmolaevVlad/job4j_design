@@ -13,9 +13,16 @@ public class LogFilter {
 
     public List<String> filter() {
         List<String> rsl = new ArrayList<>();
+        String[] str;
         try (BufferedReader input = new BufferedReader(new FileReader(file))) {
-            input.lines().forEach(rsl::add);
-            rsl.removeIf(s -> !s.split(" ")[s.split(" ").length - 2].contains("404"));
+            input.lines().filter(s -> s.contains(" 404 ")).forEach(rsl::add);
+            for (int index = 0; index < rsl.size(); index++) {
+                str = rsl.get(index).split(" ");
+                if (!str[str.length - 2].equals("404")) {
+                    rsl.remove(index);
+                    index--;
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
