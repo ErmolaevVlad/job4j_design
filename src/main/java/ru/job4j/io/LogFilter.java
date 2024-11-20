@@ -15,12 +15,12 @@ public class LogFilter {
         List<String> rsl = new ArrayList<>();
         String[] str;
         try (BufferedReader input = new BufferedReader(new FileReader(file))) {
-            input.lines().filter(s -> s.contains(" 404 ")).forEach(rsl::add);
-            for (int index = 0; index < rsl.size(); index++) {
-                str = rsl.get(index).split(" ");
-                if (!str[str.length - 2].equals("404")) {
-                    rsl.remove(index);
-                    index--;
+            for (String line = input.readLine(); line != null; line = input.readLine()) {
+                if (line.contains(" 404 ")) {
+                    str = line.split(" ");
+                    if (str[str.length - 2].equals("404")) {
+                        rsl.add(line);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -46,4 +46,3 @@ public class LogFilter {
         new LogFilter("data/log.txt").saveTo("data/out.txt");
     }
 }
-
