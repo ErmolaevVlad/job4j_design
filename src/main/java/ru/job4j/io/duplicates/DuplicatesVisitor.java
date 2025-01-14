@@ -22,4 +22,19 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public Map<FileProperty, List<String>> getMapFiles() {
         return mapFiles;
     }
+
+    public void consoleOutput() {
+        Map<FileProperty, List<String>> mapFiles = this.getMapFiles();
+        for (Map.Entry<FileProperty, List<String>> entry : mapFiles.entrySet()) {
+            List<String> path = entry.getValue();
+            FileProperty key = entry.getKey();
+            if (path.size() > 1) {
+                StringBuilder builder = new StringBuilder();
+                builder.append(key.getName()).append(" - ").append(key.getSize()).append(" byte:");
+                System.out.println(builder);
+                path.forEach(System.out::println);
+                System.out.println();
+            }
+        }
+    }
 }
