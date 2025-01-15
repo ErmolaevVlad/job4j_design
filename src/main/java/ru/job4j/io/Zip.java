@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -32,6 +33,19 @@ public class Zip {
         }
     }
 
+    public static boolean checkArgs(ArgsName args) {
+        if (!Files.isDirectory(Path.of(args.get("d")))) {
+            throw new IllegalArgumentException("The first parameter is not a directory");
+        }
+        if (!args.get("e").startsWith(".")) {
+            throw new IllegalArgumentException("The second parameter is incorrect");
+        }
+        if (!args.get("o").endsWith(".zip")) {
+            throw new IllegalArgumentException("The third second parameter is incorrect");
+        }
+        return true;
+    }
+
     public static void main(String[] args) throws IOException {
         Zip zip = new Zip();
         zip.packSingleFile(
@@ -39,9 +53,14 @@ public class Zip {
                 new File("./pom.zip")
         );
 
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Incorrect number of parameters");
+        }
         Zip zipFiles = new Zip();
         ArgsName argsName = ArgsName.of(args);
-        zipFiles.packFiles(Search.search(Path.of(argsName.get("d")),
-                path -> !path.toFile().getName().endsWith(argsName.get("e"))), new File(argsName.get("o")));
+        if (checkArgs(argsName)) {
+            zipFiles.packFiles(Search.search(Path.of(argsName.get("d")),
+                    path -> !path.toFile().getName().endsWith(argsName.get("e"))), new File(argsName.get("o")));
+        }
     }
 }
