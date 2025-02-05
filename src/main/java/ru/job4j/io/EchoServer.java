@@ -16,16 +16,18 @@ public class EchoServer {
                     for (String string = input.readLine(); string != null && !string.isEmpty(); string = input.readLine()) {
                         System.out.println(string);
                         if (string.contains("msg=")) {
-                            if ("Bye".equals(string.split("msg=")[1].split(" ")[0])) {
+                            String msg = string.split("msg=")[1].split(" ")[0];
+                            if ("Hello".equals(msg)) {
+                                output.write("Hello\r\n\r\n".getBytes());
+                            } else if ("Exit".equals(msg)) {
                                 server.close();
+                                output.write("server shut down\r\n\r\n".getBytes());
+                            } else {
+                                output.write("What\r\n\r\n".getBytes());
                             }
                         }
                     }
                     output.flush();
-                    if (server.isClosed()) {
-                        output.write("server shut down\r\n\r\n".getBytes());
-                        output.flush();
-                    }
                 }
             }
         }
