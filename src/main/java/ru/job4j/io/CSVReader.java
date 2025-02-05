@@ -8,15 +8,17 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class CSVReader {
+
     public static void handle(ArgsName argsName) throws Exception {
         String[] line;
         List<Integer> columns = new ArrayList<>();
         List<String[]> list = new ArrayList<>();
         StringJoiner joiner = new StringJoiner("");
+        String delimiter = argsName.get("delimiter");
 
-        try (Scanner scanner = new Scanner(Path.of(argsName.get("path"))).useDelimiter(argsName.get("delimiter"))) {
+        try (Scanner scanner = new Scanner(Path.of(argsName.get("path"))).useDelimiter(delimiter)) {
             while (scanner.hasNextLine()) {
-                list.add(scanner.nextLine().split(argsName.get("delimiter")));
+                list.add(scanner.nextLine().split(delimiter));
             }
         }
         System.out.println(list);
@@ -32,13 +34,13 @@ public class CSVReader {
             for (int column = 0; column < columns.size(); column++) {
                 joiner.add(strings[columns.get(column)]);
                 if (!(column + 1 == columns.size())) {
-                    joiner.add(argsName.get("delimiter"));
+                    joiner.add(delimiter);
                 } else {
                     joiner.add(System.lineSeparator());
                 }
             }
         }
-        if (argsName.get("out").equals("stdout")) {
+        if ("stdout".equals(argsName.get("out"))) {
             System.out.println(joiner);
         } else {
             try (FileOutputStream output = new FileOutputStream(argsName.get("out"))) {
@@ -55,10 +57,10 @@ public class CSVReader {
         if (!argsName.get("path").endsWith(".csv")) {
             throw new IllegalArgumentException("first parameter is incorrect");
         }
-        if (!argsName.get("out").equals("stdout") && (!argsName.get("out").endsWith(".csv"))) {
+        if (!"stdout".equals(argsName.get("out")) && (!argsName.get("out").endsWith(".csv"))) {
             throw new IllegalArgumentException("third parameter is incorrect or is not a directory");
         }
-        if ((!argsName.get("delimiter").equals(";")) && (!argsName.get("delimiter").equals(","))) {
+        if ((!";".equals(argsName.get("delimiter"))) && (!",".equals(argsName.get("delimiter")))) {
             throw new IllegalArgumentException("second parameter is incorrect");
         }
         handle(argsName);
