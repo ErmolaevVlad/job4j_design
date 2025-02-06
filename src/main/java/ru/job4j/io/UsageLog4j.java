@@ -16,8 +16,9 @@ public class UsageLog4j {
         double distance = 5783;
         short children = 1;
         long dataStorageSize = 1073782400L;
+        byte car = 2;
         LOG.debug("User info name : {}, age : {}, first char name : {}, smoke : {}, weight : {},"
-                + " distance to work in meters : {}, children : {},"
-                + " data storage size : {}", name, age, firstCharName, smoke, weight, distance, children, dataStorageSize);
+                + " distance to work in meters : {}, children : {}, car : {},"
+                + " data storage size : {}", name, age, firstCharName, smoke, weight, distance, children, car, dataStorageSize);
     }
 }
