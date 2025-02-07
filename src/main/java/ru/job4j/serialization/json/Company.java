@@ -24,4 +24,20 @@ public class Company {
                 + ", activity=" + Arrays.toString(fieldOfActivity)
                 + '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean getOpen() {
+        return open;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getFieldOfActivity() {
+        return fieldOfActivity;
+    }
 }
