@@ -1,12 +1,22 @@
 package ru.job4j.serialization.xml;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.util.Arrays;
 
+@XmlRootElement(name = "company")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Company {
-    private final String name;
-    private final boolean open;
-    private final Contact contact;
-    private final String[] fieldOfActivity;
+
+    @XmlAttribute
+    private String name;
+
+    @XmlAttribute
+    private boolean open;
+    private Contact contact;
+    private String[] fieldOfActivity;
+
+    public Company() { }
 
     public Company(String name, boolean open, Contact contact, String[] fieldOfActivity) {
         this.name = name;
