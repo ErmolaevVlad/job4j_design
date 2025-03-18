@@ -1,0 +1,25 @@
+create table car_wash (
+	id serial primary key,
+	name varchar(255)
+);
+
+create table client (
+	id serial primary key,
+	name varchar(255)	
+);
+
+create table car_wash_client (
+	id serial primary key,
+	car_wash_id int references car_wash(id),
+	client_id int references client(id)
+);
+
+insert into car_wash (name) values ('Western');
+insert into car_wash (name) values ('Southern');
+
+insert into client (name) values ('Alex');
+insert into client (name) values ('Max');
+
+insert into car_wash_client (car_wash_id, client_id) values (1, 1);
+insert into car_wash_client (car_wash_id, client_id) values (1, 2);
+insert into car_wash_client (car_wash_id, client_id )values (2, 1);
