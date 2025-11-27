@@ -1,6 +1,7 @@
 package ru.job4j.tdd;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.ood.tdd.Fool;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
