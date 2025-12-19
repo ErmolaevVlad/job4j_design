@@ -20,6 +20,10 @@ public class Message {
         this.text = text;
     }
 
+    /**
+     * Нарушения принципа SRP, так как в описании класса Message содержится
+     * метод сохрания message в БД.
+     */
     void saveMessageToBD() {
         System.out.println("Message saved");
     }

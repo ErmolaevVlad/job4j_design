@@ -14,6 +14,12 @@ public class Dog {
         System.out.println("Auf");
     }
 
+    /**
+     * Нарушение принципа SRP, так как класс содержит
+     * метод для получения зарегистрироанного номера для выставки
+     * @param dog
+     * @return RegisteredNumber registered number for participation in the exhibition
+     */
     public RegisteredNumber registrationForCompetition(Dog dog) {
         return new RegisteredNumber(dog);
     }
