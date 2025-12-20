@@ -22,7 +22,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.RUB);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.RUB);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -43,7 +43,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.USD);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.USD);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -64,7 +64,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.EUR);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.EUR);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -85,7 +85,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.RUB);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.RUB);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -106,7 +106,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.USD);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.USD);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -127,7 +127,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.EUR);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.EUR);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -148,7 +148,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.RUB);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.RUB);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -169,7 +169,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.USD);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.USD);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -190,7 +190,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.EUR);
+        Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.EUR);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")

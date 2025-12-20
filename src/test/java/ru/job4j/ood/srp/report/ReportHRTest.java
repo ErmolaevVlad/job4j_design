@@ -15,7 +15,7 @@ class ReportHRTest {
         Calendar now = Calendar.getInstance();
         MemoryStore store = new MemoryStore();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportHR reportHR = new ReportHR(store);
+        Report reportHR = new ReportHR(store);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Salary;")
@@ -35,7 +35,7 @@ class ReportHRTest {
         Employee worker2 = new Employee("Alex", now, now, 150);
         store.add(worker1);
         store.add(worker2);
-        ReportHR reportHR = new ReportHR(store);
+        Report reportHR = new ReportHR(store);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Salary;")
                 .append(System.lineSeparator())
@@ -57,7 +57,7 @@ class ReportHRTest {
         Employee worker2 = new Employee("Alex", now, now, 15);
         store.add(worker1);
         store.add(worker2);
-        ReportHR reportHR = new ReportHR(store);
+        Report reportHR = new ReportHR(store);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Salary;")
                 .append(System.lineSeparator())
@@ -79,7 +79,7 @@ class ReportHRTest {
         Employee worker2 = new Employee("Alex", now, now, 100);
         store.add(worker1);
         store.add(worker2);
-        ReportHR reportHR = new ReportHR(store);
+        Report reportHR = new ReportHR(store);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Salary;")
                 .append(System.lineSeparator())

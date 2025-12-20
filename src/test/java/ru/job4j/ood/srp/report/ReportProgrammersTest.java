@@ -23,7 +23,7 @@ class ReportProgrammersTest {
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        ReportProgrammers reportProgrammers = new ReportProgrammers(store, parser, path);
+        Report reportProgrammers = new ReportProgrammers(store, parser, path);
         StringBuilder rsl = new StringBuilder();
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -57,7 +57,7 @@ class ReportProgrammersTest {
         Employee worker1 = new Employee("Alex", now, now, 150);
         store.add(worker);
         store.add(worker1);
-        ReportProgrammers reportProgrammers = new ReportProgrammers(store, parser, path);
+        Report reportProgrammers = new ReportProgrammers(store, parser, path);
         StringBuilder rsl = new StringBuilder();
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")

@@ -29,6 +29,7 @@ public class ReportAccounting implements Report {
         return converter.convert(source, sourceValue, target);
     }
 
+    @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;")

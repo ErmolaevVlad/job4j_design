@@ -21,6 +21,7 @@ public class ReportHR implements Report {
         return list;
     }
 
+    @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append("Name; Salary;")
