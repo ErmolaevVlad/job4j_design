@@ -9,23 +9,27 @@ import ru.job4j.ood.srp.store.Store;
 import java.util.Calendar;
 import java.util.function.Predicate;
 
-public class ReportAccounting {
+public class ReportAccounting implements Report {
 
     private final Store store;
     private final CurrencyConverter converter;
     private final DateTimeParser<Calendar> dateTimeParser;
+    private final Currency source;
+    private final Currency target;
 
-    public ReportAccounting(Store store, CurrencyConverter converter, DateTimeParser<Calendar> dateTimeParser) {
+    public ReportAccounting(Store store, CurrencyConverter converter, DateTimeParser<Calendar> dateTimeParser, Currency source, Currency target) {
         this.store = store;
         this.converter = converter;
         this.dateTimeParser = dateTimeParser;
+        this.source = source;
+        this.target = target;
     }
 
     private double convert(Currency source, double sourceValue, Currency target) {
         return converter.convert(source, sourceValue, target);
     }
 
-    public String generate(Predicate<Employee> filter, Currency source, Currency target) {
+    public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;")
             .append(System.lineSeparator());

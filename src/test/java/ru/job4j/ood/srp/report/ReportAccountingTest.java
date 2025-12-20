@@ -22,7 +22,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.RUB);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -32,7 +32,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.RUB, worker.getSalary(), Currency.RUB))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.RUB, Currency.RUB);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -43,7 +43,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.USD);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -53,7 +53,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.RUB, worker.getSalary(), Currency.USD))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.RUB, Currency.USD);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -64,7 +64,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.EUR);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -74,7 +74,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.RUB, worker.getSalary(), Currency.EUR))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.RUB, Currency.EUR);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -85,7 +85,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.RUB);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -95,7 +95,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.USD, worker.getSalary(), Currency.RUB))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.USD, Currency.RUB);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -106,7 +106,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.USD);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -116,7 +116,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.USD, worker.getSalary(), Currency.USD))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.USD, Currency.USD);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -127,7 +127,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.EUR);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -137,7 +137,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.USD, worker.getSalary(), Currency.EUR))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.USD, Currency.EUR);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -148,7 +148,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.RUB);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -158,7 +158,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.EUR, worker.getSalary(), Currency.RUB))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.EUR, Currency.RUB);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -169,7 +169,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.USD);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -179,7 +179,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.EUR, worker.getSalary(), Currency.USD))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.EUR, Currency.USD);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 
@@ -190,7 +190,7 @@ class ReportAccountingTest {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
-        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser);
+        ReportAccounting reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.EUR);
         store.add(worker);
         StringBuilder expected = new StringBuilder();
         expected.append("Name; Hired; Fired; Salary;")
@@ -200,7 +200,7 @@ class ReportAccountingTest {
                 .append(parser.parse(worker.getFired())).append(" ")
                 .append(converter.convert(Currency.EUR, worker.getSalary(), Currency.EUR))
                 .append(System.lineSeparator());
-        String result = reportAccounting.generate(employee -> true, Currency.EUR, Currency.EUR);
+        String result = reportAccounting.generate(employee -> true);
         assertThat(result).isEqualTo(expected.toString());
     }
 }
