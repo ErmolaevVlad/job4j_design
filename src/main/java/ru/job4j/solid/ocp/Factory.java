@@ -5,7 +5,7 @@ public class Factory {
     /**
      * Необходим завод по производству стекла
      */
-    public void factoryGlass () {
+    public void factoryGlass() {
         System.out.println("glass production");
     }
 
@@ -13,7 +13,7 @@ public class Factory {
      * Данные изменились:
      * необходим завод по производству кирпичей.
      */
-    public void factoryBrick () {
+    public void factoryBrick() {
         System.out.println("brick production");
     }
 
@@ -23,7 +23,7 @@ public class Factory {
      * Происходит нарушение принципа открытости закрытости
      * требования могут постоянно изменяться и придется постоянно менять код
      */
-    public void factoryPaper () {
+    public void factoryPaper() {
         System.out.println("paper production");
     }
 
