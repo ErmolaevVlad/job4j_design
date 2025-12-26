@@ -8,6 +8,7 @@ import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.MemoryStore;
+import ru.job4j.ood.srp.store.Store;
 
 import java.util.Calendar;
 
@@ -19,7 +20,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromRUBtoRUBThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.RUB);
@@ -40,7 +41,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromRUBtoUSDThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.USD);
@@ -61,7 +62,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromRUBtoEURThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.RUB, Currency.EUR);
@@ -82,7 +83,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromUSDtoRUBThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.RUB);
@@ -103,7 +104,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromUSDtoUSDThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.USD);
@@ -124,7 +125,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromUSDtoEURThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.USD, Currency.EUR);
@@ -145,7 +146,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromEURtoRUBThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.RUB);
@@ -166,7 +167,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromEURtoUSDThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.USD);
@@ -187,7 +188,7 @@ class ReportAccountingTest {
     public void whenConvertSalaryFromEURtoEURThenGetCurrentSalary() {
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportAccounting = new ReportAccounting(store, converter, parser, Currency.EUR, Currency.EUR);

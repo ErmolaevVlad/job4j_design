@@ -5,6 +5,7 @@ import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.MemoryStore;
+import ru.job4j.ood.srp.store.Store;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,7 +20,7 @@ class ReportProgrammersTest {
     public void whenListOfEmployeesHasOneEmployeeThenFileCSVHasOneEmployee() {
         String path = "data/ProgrammerReport.csv";
         Calendar now = Calendar.getInstance();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
@@ -51,7 +52,7 @@ class ReportProgrammersTest {
     public void whenListOfEmployeesHasTwoEmployeesThenFileCSVHasTwoEmployees() {
         String path = "data/ProgrammerReport.csv";
         Calendar now = Calendar.getInstance();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee worker = new Employee("Ivan", now, now, 100);
         Employee worker1 = new Employee("Alex", now, now, 150);

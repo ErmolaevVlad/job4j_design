@@ -3,6 +3,7 @@ package ru.job4j.ood.srp.report;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.MemoryStore;
+import ru.job4j.ood.srp.store.Store;
 
 import java.util.Calendar;
 
@@ -13,7 +14,7 @@ class ReportHRTest {
     @Test
     public void whenAddEmployeeThenReturnOnlyHisNameAndSalary() {
         Calendar now = Calendar.getInstance();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         Employee worker = new Employee("Ivan", now, now, 100);
         Report reportHR = new ReportHR(store);
         store.add(worker);
@@ -30,7 +31,7 @@ class ReportHRTest {
     @Test
     public void whenEmployeeOneSalaryLessThanEmployeeTwoSalaryReturnTwoOne() {
         Calendar now = Calendar.getInstance();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         Employee worker1 = new Employee("Ivan", now, now, 100);
         Employee worker2 = new Employee("Alex", now, now, 150);
         store.add(worker1);
@@ -52,7 +53,7 @@ class ReportHRTest {
     @Test
     public void whenEmployeeTwoSalaryLessThanEmployeeOneSalaryReturnOneTwo() {
         Calendar now = Calendar.getInstance();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         Employee worker1 = new Employee("Ivan", now, now, 100);
         Employee worker2 = new Employee("Alex", now, now, 15);
         store.add(worker1);
@@ -74,7 +75,7 @@ class ReportHRTest {
     @Test
     public void whenEmployeeOneSalaryEqualsEmployeeTwoSalaryReturnOneTwo() {
         Calendar now = Calendar.getInstance();
-        MemoryStore store = new MemoryStore();
+        Store store = new MemoryStore();
         Employee worker1 = new Employee("Ivan", now, now, 100);
         Employee worker2 = new Employee("Alex", now, now, 100);
         store.add(worker1);
