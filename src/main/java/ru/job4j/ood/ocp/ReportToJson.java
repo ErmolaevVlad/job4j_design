@@ -18,7 +18,6 @@ public class ReportToJson implements Report {
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
 
-
     public ReportToJson(Store store, DateTimeParser<Calendar> dateTimeParser) {
         this.store = store;
         this.dateTimeParser = dateTimeParser;

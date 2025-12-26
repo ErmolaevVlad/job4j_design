@@ -40,7 +40,7 @@ public class ReportToXML implements Report {
             JAXBContext jaxbContext = JAXBContext.newInstance(WrapperEmployees.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            try(StringWriter writer = new StringWriter()) {
+            try (StringWriter writer = new StringWriter()) {
                 marshaller.marshal(new WrapperEmployees(wrapperEmployeeList), writer);
                 rsl = writer.toString();
             } catch (IOException e) {
