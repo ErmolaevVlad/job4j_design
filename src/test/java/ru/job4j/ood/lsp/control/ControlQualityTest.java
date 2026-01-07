@@ -11,9 +11,7 @@ import ru.job4j.ood.lsp.store.Warehouse;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -24,16 +22,16 @@ class ControlQualityTest {
        Store warehouse = new Warehouse();
        Store shop = new Shop();
        Store trash = new Trash();
+       List<Store> stores = new ArrayList<>();
+       stores.add(warehouse);
+       stores.add(trash);
+       stores.add(shop);
        Food apple = new Apple("Gold", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(7), 100, 20);
        Food cake = new Cakes("Chocolate", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(7), 500, 20);
        List<Food> foodList = new ArrayList<>();
        foodList.add(apple);
        foodList.add(cake);
-       Map<String, Store> storeMap = new HashMap<>();
-       storeMap.put("warehouse", warehouse);
-       storeMap.put("shop", shop);
-       storeMap.put("trash", trash);
-       ControlQuality controlQuality = new ControlQuality(storeMap);
+       ControlQuality controlQuality = new ControlQuality(stores, new CalculateRemainingShelfLife());
        controlQuality.calcQuality(foodList);
        assertThat(warehouse.getAllProductFromStore())
                .hasSize(2)
@@ -41,20 +39,20 @@ class ControlQualityTest {
     }
 
    @Test
-   void whenAddOneProductThenAddIntoShop() {
+   void whenAddTwoProductThenAddIntoShop() {
       Store warehouse = new Warehouse();
       Store shop = new Shop();
       Store trash = new Trash();
+      List<Store> stores = new ArrayList<>();
+      stores.add(warehouse);
+      stores.add(trash);
+      stores.add(shop);
       Apple apple = new Apple("Gold", LocalDateTime.now().minusDays(4), LocalDateTime.now().plusDays(7), 100, 20);
       Food cake = new Cakes("Chocolate", LocalDateTime.now().minusDays(4), LocalDateTime.now().plusDays(7), 500, 20);
       List<Food> foodList = new ArrayList<>();
       foodList.add(apple);
       foodList.add(cake);
-      Map<String, Store> storeMap = new HashMap<>();
-      storeMap.put("warehouse", warehouse);
-      storeMap.put("shop", shop);
-      storeMap.put("trash", trash);
-      ControlQuality controlQuality = new ControlQuality(storeMap);
+      ControlQuality controlQuality = new ControlQuality(stores, new CalculateRemainingShelfLife());
       controlQuality.calcQuality(foodList);
       assertThat(shop.getAllProductFromStore())
               .hasSize(2)
@@ -66,15 +64,15 @@ class ControlQualityTest {
       Store warehouse = new Warehouse();
       Store shop = new Shop();
       Store trash = new Trash();
+      List<Store> stores = new ArrayList<>();
+      stores.add(warehouse);
+      stores.add(trash);
+      stores.add(shop);
       Apple apple = new Apple("Gold", LocalDateTime.now().minusDays(6), LocalDateTime.now().plusDays(2), 100, 20);
       List<Food> foodList = new ArrayList<>();
       foodList.add(apple);
       double expectedPrice = apple.getPrice() * (double) (100 - apple.getDiscount()) / 100;
-      Map<String, Store> storeMap = new HashMap<>();
-      storeMap.put("warehouse", warehouse);
-      storeMap.put("shop", shop);
-      storeMap.put("trash", trash);
-      ControlQuality controlQuality = new ControlQuality(storeMap);
+      ControlQuality controlQuality = new ControlQuality(stores, new CalculateRemainingShelfLife());
       controlQuality.calcQuality(foodList);
       assertThat(shop.getAllProductFromStore().get(0).getPrice()).isEqualTo(expectedPrice);
    }
@@ -84,16 +82,16 @@ class ControlQualityTest {
       Store warehouse = new Warehouse();
       Store shop = new Shop();
       Store trash = new Trash();
+      List<Store> stores = new ArrayList<>();
+      stores.add(warehouse);
+      stores.add(trash);
+      stores.add(shop);
       Apple apple = new Apple("Gold", LocalDateTime.now().minusDays(6), LocalDateTime.now().minusDays(1), 100, 20);
       Food cake = new Cakes("Chocolate", LocalDateTime.now().minusDays(4), LocalDateTime.now().minusDays(1), 500, 20);
       List<Food> foodList = new ArrayList<>();
       foodList.add(apple);
       foodList.add(cake);
-      Map<String, Store> storeMap = new HashMap<>();
-      storeMap.put("warehouse", warehouse);
-      storeMap.put("shop", shop);
-      storeMap.put("trash", trash);
-      ControlQuality controlQuality = new ControlQuality(storeMap);
+      ControlQuality controlQuality = new ControlQuality(stores, new CalculateRemainingShelfLife());
       controlQuality.calcQuality(foodList);
       assertThat(trash.getAllProductFromStore())
               .hasSize(2)
@@ -101,26 +99,28 @@ class ControlQualityTest {
    }
 
    @Test
-   void whenAddTwoProductThenAddIntoTrashAndShop() {
+   void whenAddThreeProductInDifferentStoresThenAddIntoTrashAndShop() {
       Store warehouse = new Warehouse();
       Store shop = new Shop();
       Store trash = new Trash();
-      Apple apple = new Apple("Gold", LocalDateTime.now().minusDays(6), LocalDateTime.now().minusDays(1), 100, 20);
+      List<Store> stores = new ArrayList<>();
+      stores.add(warehouse);
+      stores.add(trash);
+      stores.add(shop);
+      Apple apple = new Apple("Gold", LocalDateTime.now().minusDays(6), LocalDateTime.now().plusDays(5), 100, 20);
       Food cake = new Cakes("Chocolate", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(6), 500, 20);
+      Food bananaCake = new Cakes("Banana", LocalDateTime.now().minusDays(3), LocalDateTime.now().minusDays(1), 500, 20);
       List<Food> foodList = new ArrayList<>();
       foodList.add(apple);
       foodList.add(cake);
-      Map<String, Store> storeMap = new HashMap<>();
-      storeMap.put("warehouse", warehouse);
-      storeMap.put("shop", shop);
-      storeMap.put("trash", trash);
-      ControlQuality controlQuality = new ControlQuality(storeMap);
+      foodList.add(bananaCake);
+      ControlQuality controlQuality = new ControlQuality(stores, new CalculateRemainingShelfLife());
       controlQuality.calcQuality(foodList);
       assertThat(trash.getAllProductFromStore())
               .hasSize(1)
-              .containsExactlyInAnyOrder(apple);
+              .containsExactlyInAnyOrder(bananaCake);
       assertThat(shop.getAllProductFromStore())
-              .hasSize(1)
-              .containsExactlyInAnyOrder(cake);
+              .hasSize(2)
+              .containsExactlyInAnyOrder(cake, apple);
    }
 }

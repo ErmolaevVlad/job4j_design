@@ -8,6 +8,7 @@ public class Food {
     private LocalDateTime createDate;
     private double price;
     private int discount;
+    private long remainingShelfLife;
 
     public Food(String name, LocalDateTime createDate, LocalDateTime expiryDate, double price, int discount) {
         this.name = name;
@@ -47,5 +48,13 @@ public class Food {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public long getRemainingShelfLife() {
+        return remainingShelfLife;
+    }
+
+    public void setRemainingShelfLife(long remainingShelfLife) {
+        this.remainingShelfLife = remainingShelfLife;
     }
 }
