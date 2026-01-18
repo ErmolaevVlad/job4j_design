@@ -30,4 +30,13 @@ public class ControlQuality {
             store.takeProductForSore(foodListWithShelfLife);
         }
     }
+
+    public void resort() {
+        List<Food> foods = new ArrayList<>();
+        for (Store store : stores) {
+            foods.addAll(store.getAllProductFromStore());
+            store.getAllProductFromStore().clear();
+        }
+        calcQuality(foods);
+    }
 }
