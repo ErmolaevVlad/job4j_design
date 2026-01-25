@@ -44,6 +44,70 @@ class QuickListTest {
         assertThat(list).containsExactly(10, 8, 1, 1, 0, -2, -8);
     }
 
+    @Test
+    void whenNumberLessZeroReverseOrderThenOk() {
+        Comparator<Integer> comparator = (a, b) -> b - a;
+        List<Integer> list = new ArrayList<>();
+        list.add(-2);
+        list.add(-8);
+        list.add(-1);
+        list.add(-20);
+        list.add(-10);
+        list.add(-1);
+        list.add(-8);
+        QuickList.quickSort(list, comparator);
+        System.out.println(list);
+        assertThat(list).containsExactly(-1, -1, -2, -8, -8, -10, -20);
+    }
+
+    @Test
+    void whenNumberLessThanZeroThenOk() {
+        Comparator<Integer> comparator = Integer::compare;
+        List<Integer> list = new ArrayList<>();
+        list.add(-2);
+        list.add(-8);
+        list.add(-1);
+        list.add(-20);
+        list.add(-10);
+        list.add(-1);
+        list.add(-8);
+        QuickList.quickSort(list, comparator);
+        System.out.println(list);
+        assertThat(list).containsExactly(-20, -10, -8, -8, -2, -1, -1);
+    }
+
+    @Test
+    void whenNumberGreaterThanZeroThenOk() {
+        Comparator<Integer> comparator = Integer::compare;
+        List<Integer> list = new ArrayList<>();
+        list.add(2);
+        list.add(8);
+        list.add(1);
+        list.add(20);
+        list.add(10);
+        list.add(1);
+        list.add(8);
+        QuickList.quickSort(list, comparator);
+        System.out.println(list);
+        assertThat(list).containsExactly(1, 1, 2, 8, 8, 10, 20);
+    }
+
+    @Test
+    void whenAllNumbersZeroThenOk() {
+        Comparator<Integer> comparator = Integer::compare;
+        List<Integer> list = new ArrayList<>();
+        list.add(0);
+        list.add(0);
+        list.add(0);
+        list.add(0);
+        list.add(0);
+        list.add(0);
+        list.add(0);
+        QuickList.quickSort(list, comparator);
+        System.out.println(list);
+        assertThat(list).containsExactly(0, 0, 0, 0, 0, 0, 0);
+    }
+
     private static class User {
         private Integer id;
         private String name;
