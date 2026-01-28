@@ -29,7 +29,7 @@ public class MainTest {
         intervals.add(new Interval(4, 6));
 
         int[] result = Main.findMaxOverlapInterval(intervals);
-        assertThat(result).containsExactly(3, 4);
+        assertThat(result).containsExactly(2, 4);
     }
 
     @Test

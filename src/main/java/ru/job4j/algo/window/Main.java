@@ -31,6 +31,7 @@ public class Main {
         int maxStart = -1;
         int maxEnd = -1;
 
+        intervals.sort(Comparator.comparingInt(i -> i.start));
         for (Interval interval : intervals) {
             while (!activeIntervals.isEmpty() && (activeIntervals.peek().end < interval.start)) {
                 activeIntervals.poll();
@@ -39,11 +40,6 @@ public class Main {
             if (activeIntervals.size() > maxOverlap) {
                 maxOverlap = activeIntervals.size();
                 maxStart = interval.start;
-                maxEnd = activeIntervals.peek().end;
-            }
-            if (!activeIntervals.isEmpty()
-                    && activeIntervals.peek().start <= maxStart
-                    && activeIntervals.peek().end != maxEnd) {
                 maxEnd = activeIntervals.peek().end;
             }
         }
