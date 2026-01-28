@@ -33,7 +33,7 @@ public class Main {
 
         intervals.sort(Comparator.comparingInt(i -> i.start));
         for (Interval interval : intervals) {
-            while (!activeIntervals.isEmpty() && (activeIntervals.peek().end < interval.start)) {
+            while (!activeIntervals.isEmpty() && (activeIntervals.peek().end <= interval.start)) {
                 activeIntervals.poll();
             }
             activeIntervals.add(interval);
