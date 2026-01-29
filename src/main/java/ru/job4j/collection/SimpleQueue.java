@@ -29,4 +29,8 @@ public class SimpleQueue<T> {
         input.push(value);
         inputSize++;
     }
+
+    public boolean isEmpty() {
+        return inputSize == 0 && outputSize == 0;
+    }
 }
