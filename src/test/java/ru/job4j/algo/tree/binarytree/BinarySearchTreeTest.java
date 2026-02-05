@@ -108,4 +108,14 @@ class BinarySearchTreeTest {
         assertThat(tree.inPreOrder()).hasSize(16)
                 .containsExactly(2, 1, 11, 6, 4, 3, 5, 8, 7, 9, 14, 12, 13, 16, 15, 17);
     }
+
+    @Test
+    void whenClearThenOk() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        for (int element : new int[]{2, 1, 10, 6, 14, 4, 8, 12, 16, 11, 9, 13, 15, 17, 3, 5, 7}) {
+            tree.put(element);
+        }
+        tree.clear();
+        assertThat(tree.inPostOrder()).isEmpty();
+    }
 }
